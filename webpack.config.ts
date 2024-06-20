@@ -22,7 +22,7 @@ export default (env: EnvVariables) => {
 
     const config: webpack.Configuration = {
         mode: env.mode ?? 'development', // https://webpack.js.org/configuration/mode/#root
-        entry: path.resolve(__dirname, 'src', 'index.ts'),
+        entry: path.resolve(__dirname, 'src', 'index.tsx'),
         output: {
             filename: '[name].[contenthash].js',
             path: path.resolve(__dirname, 'build'),
@@ -35,7 +35,7 @@ export default (env: EnvVariables) => {
         module: {
             rules: [
                 {
-                    test: /\.tsx?$/, // https://webpack.js.org/guides/typescript/#loader
+                    test: /\.tsx?$/, // https://webpack.js.org/guides/typescript/#loader work with JSX*
                     use: 'ts-loader',
                     exclude: /node_modules/,
                 },
