@@ -1,5 +1,6 @@
 // https://webpack.js.org/configuration/configuration-languages/
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as path from 'path';
 import webpack from 'webpack';
 import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
@@ -31,9 +32,24 @@ export default (env: EnvVariables) => {
         plugins: [
             new HtmlWebpackPlugin({template: path.resolve(__dirname, 'public', 'index.html')}),// https://webpack.js.org/concepts/#plugins
             isDev && new webpack.ProgressPlugin(),
+            isProd && new MiniCssExtractPlugin({
+                filename: 'css/[name].[contenthash:8].css',
+                chunkFilename: 'css/[name].[contenthash:8].css',
+            }), // https://webpack.js.org/plugins/mini-css-extract-plugin/
         ].filter(Boolean),
         module: {
             rules: [
+                {
+                    test: /\.s[ac]ss$/i,
+                    use: [
+                        // Creates `style` nodes from JS strings
+                        isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+                        // Translates CSS into CommonJS
+                        "css-loader",
+                        // Compiles Sass to CSS
+                        "sass-loader",
+                    ]
+                },
                 {
                     test: /\.tsx?$/, // https://webpack.js.org/guides/typescript/#loader work with JSX*
                     use: 'ts-loader',
