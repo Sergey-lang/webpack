@@ -20,7 +20,7 @@ export function buildWebpack(options: IBuildOptions): webpack.Configuration {
         module: {
             rules: buildLoaders(options),
         },
-        resolve: buildResolvers(),
+        resolve: buildResolvers(options),
         devServer: isDev ? buildDevServer(options) : undefined,
         optimization: {
             runtimeChunk: 'single',
