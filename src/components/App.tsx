@@ -1,5 +1,6 @@
 import classes from './App.module.scss';
 import { Link, Outlet } from 'react-router-dom';
+import About from '../pages/about/About';
 
 export const App = () => {
     return (
@@ -10,7 +11,7 @@ export const App = () => {
             <h1 className={classes.value}></h1>
             Hello
             <button className={classes.button}>click me</button>
-            <Outlet/>
+            <About />
         </div>
     )
 }
