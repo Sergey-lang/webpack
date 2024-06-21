@@ -5,6 +5,33 @@ import { IBuildOptions } from './types/types';
 export function buildLoaders(options: IBuildOptions): ModuleOptions['rules'] {
     const isDev = options.mode === 'development';
 
+    const assetLoader = {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+    } // https://webpack.js.org/guides/asset-management/
+
+    const svgLoader = {
+        test: /\.svg$/,
+        use: [
+            {
+                loader: '@svgr/webpack',
+                options: {
+                    icon: true,
+                    svgo: {
+                        plugins: [
+                            {
+                                name: 'convertColors',
+                                params: {
+                                    currentColor: true,
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ],
+    }
+
     const ccsLoaderWithModules = {
         loader: 'css-loader',
         options: {
@@ -34,6 +61,8 @@ export function buildLoaders(options: IBuildOptions): ModuleOptions['rules'] {
     }
 
     return [
+        svgLoader,
+        assetLoader,
         scssLoader,
         tsLoader,
     ]
