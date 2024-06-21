@@ -5,16 +5,26 @@ import { IBuildOptions } from './types/types';
 export function buildLoaders(options: IBuildOptions): ModuleOptions['rules'] {
     const isDev = options.mode === 'development';
 
+    const ccsLoaderWithModules = {
+        loader: 'css-loader',
+        options: {
+            modules: {
+                localIdentName: isDev ? '[path][name]__[local]' : '[hash:base64:8]'
+            },
+            esModule: false,
+        },
+    }
+
     const scssLoader = {
         test: /\.s[ac]ss$/i,
         use: [
             // Creates `style` nodes from JS strings
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
             // Translates CSS into CommonJS
-            'css-loader',
+            ccsLoaderWithModules,
             // Compiles Sass to CSS
             'sass-loader',
-        ]
+        ],
     }
 
     const tsLoader = {
