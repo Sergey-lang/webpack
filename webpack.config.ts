@@ -7,6 +7,7 @@ import path from 'path';
 interface EnvVariables {
     mode: BuildModeType;
     port: number;
+    analyzer?: boolean;
 }
 
 export default (env: EnvVariables) => {
@@ -22,6 +23,7 @@ export default (env: EnvVariables) => {
     const config: webpack.Configuration = buildWebpack({
         mode: env.mode ?? 'development',
         port: env.port ?? 3000,
+        analyzer: env.analyzer,
         paths
     })
     return config

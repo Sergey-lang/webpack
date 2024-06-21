@@ -6,5 +6,7 @@ export function buildDevServer(options: IBuildOptions): DevServerConfiguration {
         port: options.port ?? 3000,
         open: true,
         static: './dist',
+        // static for nginx - need to do proxying to index.html
+        historyApiFallback: true // https://webpack.js.org/configuration/dev-server/
     }
 }
