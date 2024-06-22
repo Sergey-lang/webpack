@@ -5,7 +5,13 @@ import av1 from '@/assets/avatar_1.jpg';
 import av2 from '@/assets/avatar_2.png';
 import Avatar3 from '@/assets/avatar_3.svg';
 
+function EXAMPLE(a: number) {
+    console.log('EXAMPLE')
+}
+
 export const App = () => {
+
+    EXAMPLE('d');
 
     if (__PLATFORM__ === 'desktop') {
         return <div>desktop</div>
