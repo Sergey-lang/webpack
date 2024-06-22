@@ -11,7 +11,7 @@ function EXAMPLE(a: number) {
 
 export const App = () => {
 
-    EXAMPLE('d');
+    /*EXAMPLE('d');
 
     if (__PLATFORM__ === 'desktop') {
         return <div>desktop</div>
@@ -19,7 +19,7 @@ export const App = () => {
 
     if (__PLATFORM__ === 'mobile') {
         return <div>mobile</div>
-    }
+    }*/
 
 
     return (

@@ -4,6 +4,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { IBuildOptions } from './types/types';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 export function buildPlugins({mode, paths, analyzer, platform}: IBuildOptions): Configuration['plugins'] {
     const isDev = mode === 'development';
@@ -19,6 +20,7 @@ export function buildPlugins({mode, paths, analyzer, platform}: IBuildOptions): 
     if (isDev) {
         plugins.push(new webpack.ProgressPlugin());
         plugins.push(new ForkTsCheckerWebpackPlugin()); // https://www.npmjs.com/package/fork-ts-checker-webpack-plugin
+        plugins.push(new ReactRefreshWebpackPlugin()) // https://github.com/pmmmwh/react-refresh-webpack-plugin/
     }
 
     if (isProd) {
