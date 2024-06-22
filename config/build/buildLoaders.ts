@@ -53,10 +53,17 @@ export function buildLoaders(options: IBuildOptions): ModuleOptions['rules'] {
             'sass-loader',
         ],
     }
-
+    // or babel loader without TS
     const tsLoader = {
         test: /\.tsx?$/, // https://webpack.js.org/guides/typescript/#loader work with JSX*
-        use: 'ts-loader',
+        use: [
+            {
+                loader: 'ts-loader',
+                options: {
+                    transpileOnly: true, // https://webpack.js.org/guides/build-performance/
+                },
+            },
+        ],
         exclude: /node_modules/,
     }
 
