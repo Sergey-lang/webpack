@@ -4,12 +4,15 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { IBuildOptions } from './types/types';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
-export function buildPlugins({mode, paths, analyzer}: IBuildOptions): Configuration['plugins'] {
+export function buildPlugins({mode, paths, analyzer, platform}: IBuildOptions): Configuration['plugins'] {
     const isDev = mode === 'development';
     const isProd = mode === 'production';
 
     const plugins: Configuration['plugins'] = [
         new HtmlWebpackPlugin({template: paths.html}),// https://webpack.js.org/concepts/#plugins
+        new webpack.DefinePlugin({
+            __PLATFORM__: JSON.stringify(platform),
+        }), // https://webpack.js.org/plugins/define-plugin/
     ]
 
     if (isDev) {
