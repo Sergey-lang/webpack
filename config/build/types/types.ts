@@ -6,6 +6,7 @@ export interface IBuildPath {
     html: string;
     output: string;
     src: string;
+    public: string;
 }
 
 export interface IBuildOptions {
