@@ -23,8 +23,8 @@ export const App = () => {
 
 
     return (
-        <div>
-            <h1>Platform {__PLATFORM__}</h1>
+        <div data-testid="App.DataTestId">
+            <h1 data-testid="PLatform">Platform {__PLATFORM__}</h1>
             <div>
                 <img src={av1} alt="1" width={100} height={100}/>
                 <img src={av2} alt="1" width={100} height={100}/>
